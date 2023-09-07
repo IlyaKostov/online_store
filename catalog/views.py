@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from catalog.models import Product
+from catalog.models import Product, Contact
 from catalog.utils import save_to_json
 
 
@@ -15,6 +15,7 @@ def home(request):
 
 
 def contact(request):
+    contacts = Contact.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -22,4 +23,4 @@ def contact(request):
 
         print(f'You have new message from {name}({email}): {message}')
         save_to_json(request.POST)
-    return render(request, 'catalog/contact.html')
+    return render(request, 'catalog/contact.html', {'contacts': contacts})

@@ -36,12 +36,13 @@ class Category(models.Model):
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100, verbose_name='имя')
-    email = models.CharField(max_length=200, verbose_name='email')
+    full_name = models.CharField(max_length=100, verbose_name='имя')
+    email = models.CharField(max_length=100, verbose_name='email')
+    phone = models.CharField(max_length=50, verbose_name='телефон')
     message = models.TextField(verbose_name='сообщение', **NULLABLE)
 
     def __str__(self):
-        return f'{self.name} {self.email}'
+        return f'{self.full_name} {self.email} {self.phone}'
 
     class Meta:
         verbose_name = 'контакт'
