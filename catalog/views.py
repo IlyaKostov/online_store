@@ -1,11 +1,17 @@
 from django.shortcuts import render
 
+from catalog.models import Product
 from catalog.utils import save_to_json
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'catalog/index.html')
+def home(request):
+    latest_products = Product.objects.order_by('-id')[:5]
+
+    # Вывод товаров в консоль
+    for product in latest_products:
+        print(f'Название: {product.product_name}, Цена: {product.purchase_price}')
+    return render(request, 'catalog/home.html')
 
 
 def contact(request):
