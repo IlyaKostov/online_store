@@ -2,12 +2,9 @@
 {% load my_tags %}
 {% block content %}
 <div class="jumbotron">
-    <div class="container">
-        <h3 class="display-4 text-center">{{ object.product_name }}</h3>
-
-    </div>
+    <h1 class="display text-center mt-4">{{ object.product_name }}</h1>
 </div>
-<img src="{% mediapath object.preview %}" class="rounded mx-auto d-block" alt="preview" width="auto" height="500">
+<img src="{% mediapath object.preview %}" class="rounded mx-auto d-block" alt="preview" height="500">
 <br>
 
 <div class="container">
