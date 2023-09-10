@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h3 class="display-4 text-center">{{ object.product_name }}</h3>
+
+    </div>
+</div>
+<img src="{% mediapath object.preview %}" class="rounded mx-auto d-block" alt="preview" width="auto" height="500">
+<br>
+
+<div class="container">
+    <div class="card mb-4 box-shadow">
+        <div class="card-body">
+            <p>{{ object.description }}</p>
+            <ul class="list-unstyled mt-3 mb-2 text-start m-2">
+                <li>- Категория {{ object.category }}</li>
+                <li>- Создан {{ object.created_at }}</li>
+                <li>- Обновлено {{ object.updated_at }}</li>
+            </ul>
+            <h3 class="card-title pricing-card-title">{{ object.purchase_price }} руб.</h3>
+            <a href="#" type="button"
+               class="btn btn-lg btn-outline-primary">Купить</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

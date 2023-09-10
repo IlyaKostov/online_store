@@ -6,12 +6,10 @@ from catalog.utils import save_to_json
 
 # Create your views here.
 def home(request):
-    latest_products = Product.objects.order_by('-id')[:5]
-
-    # Вывод товаров в консоль
-    for product in latest_products:
-        print(f'Название: {product.product_name}, Цена: {product.purchase_price}')
-    return render(request, 'catalog/home.html')
+    context = {
+        'objects_list': Product.objects.all()
+    }
+    return render(request, 'catalog/home.html', context)
 
 
 def contact(request):
@@ -24,3 +22,10 @@ def contact(request):
         print(f'You have new message from {name}({email}): {message}')
         save_to_json(request.POST)
     return render(request, 'catalog/contact.html', {'contacts': contacts})
+
+
+def product(request, pk):
+    context = {
+        'object': Product.objects.get(pk=pk)
+    }
+    return render(request, 'catalog/product.html', context)
