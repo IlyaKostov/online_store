@@ -1,10 +1,17 @@
+{% url 'catalog:home' as home_url %}
+{% url 'catalog:contact' as contact_url %}
+{% url 'blog:list' as blog_url %}
+
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'catalog:home' %}">Home</a>
+        <li class="nav-item{% if request.path == home_url %} active{% endif %}">
+            <a class="nav-link" href="{{ home_url }}">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'catalog:contact' %}">Contact <span class="sr-only">(current)</span></a>
+        <li class="nav-item{% if request.path == contact_url %} active{% endif %}">
+            <a class="nav-link" href="{{ contact_url }}">Contact <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item{% if request.path == blog_url %} active{% endif %}">
+            <a class="nav-link" href="{{ blog_url }}">Blog <span class="sr-only">(current)</span></a>
         </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

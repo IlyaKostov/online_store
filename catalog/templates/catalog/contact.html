@@ -15,12 +15,12 @@
         <!-- Example row of columns -->
         <div class="row justify-content-evenly">
             <div class="col-4">
-                {% for contact in contacts %}
+                {% for object in object_list %}
                     <div>
                         <div> Телефон: </div>
-                        <div> {{ contact.phone }}</div>
+                        <div> {{ object.phone }}</div>
                         <hr>
-                        <div> {{ contact.message|linebreaks }}
+                        <div> {{ object.message|linebreaks }}
                         </div>
                     </div>
                 {% endfor %}
