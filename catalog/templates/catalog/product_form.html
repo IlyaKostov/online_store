@@ -1,0 +1,55 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h3 class="display-4">
+                {% if object %}
+                Изменить продукт
+                {% else %}
+                Создать продукт
+                {% endif %}
+            </h3>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <form method="post" enctype="multipart/form-data" class="row">
+            <div class="col-4 ml-5">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-primary w-100" type="submit">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 ml-5">
+                <div class="card">
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                            {{ form.as_p }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+
+
+</main>
+
+{% endblock %}

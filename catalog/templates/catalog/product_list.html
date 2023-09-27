@@ -8,7 +8,9 @@
         <div class="container">
             <h1 class="display-4">Добро пожаловать в наш Онлайн-магазин!</h1>
 
-<!--            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
+            <a href="{% url 'catalog:product_create' %}" class="btn btn-sm btn-outline-primary">Добавить продукт</a>
+        </div>
+    </div>
         </div>
     </div>
 
@@ -23,6 +25,17 @@
                         <p class="card-text">{{ object.description|slice:100 }}... </p>
                         <p><a class="btn btn-secondary" href="{% url 'catalog:product' object.pk %}"
                               role="button">Подробнее &raquo;</a></p>
+                        <span class="text-muted">Создан {{ object.created_at }}</span>
+                        <br>
+                        {% for version in versions %}
+                        {% if object.pk == version.product.pk %}
+                        <span class="text-muted">Версия {{ version.version_name }}</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-link" href="{% url 'catalog:product_update' object.pk %}">Изменить</a>
+                        <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
                     </div>
                 </div>
             {% endfor %}
