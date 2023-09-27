@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 NULLABLE = {'null': True, 'blank': True}
 
@@ -61,3 +62,9 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'версия'
         verbose_name_plural = 'версии'
+
+
+@receiver(pre_save, sender=Version)
+def update_active_versions(sender, instance, **kwargs):
+    if instance.is_current_version:  # Проверяем, если версия становится активной
+        Version.objects.filter(product=instance.product).exclude(pk=instance.pk).update(is_current_version=False)
