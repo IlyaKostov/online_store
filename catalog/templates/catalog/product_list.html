@@ -1,51 +1,49 @@
 {% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
-<main role="main">
+    <main role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">Добро пожаловать в наш Онлайн-магазин!</h1>
+
+                <a href="{% url 'catalog:product_create' %}" class="btn btn-sm btn-outline-primary">Добавить продукт</a>
+            </div>
+        </div>
+
         <div class="container">
-            <h1 class="display-4">Добро пожаловать в наш Онлайн-магазин!</h1>
-
-            <a href="{% url 'catalog:product_create' %}" class="btn btn-sm btn-outline-primary">Добавить продукт</a>
-        </div>
-    </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            {% for object in object_list %}
-                <div class="card mb-4 mr-5" style="width: 20rem;">
-                    <img src="{{ object.preview|my_media }}" class="card-img-top" alt="preview">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ object.product_name }}</h5>
-                        <p class="card-text">{{ object.description|slice:100 }}... </p>
-                        <p><a class="btn btn-secondary" href="{% url 'catalog:product' object.pk %}"
-                              role="button">Подробнее &raquo;</a></p>
-                        <span class="text-muted">Создан {{ object.created_at }}</span>
-                        <br>
-                        {% for version in versions %}
-                        {% if object.pk == version.product.pk %}
-                        <span class="text-muted">Версия {{ version.version_name }}</span>
-                        {% endif %}
-                        {% endfor %}
+            <!-- Example row of columns -->
+            <div class="row">
+                {% for object in object_list %}
+                    <div class="card mb-4 mr-5" style="width: 20rem;">
+                        <img src="{{ object.preview|my_media }}" class="card-img-top" alt="preview">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.product_name }}</h5>
+                            <p class="card-text">{{ object.description|slice:100 }}... </p>
+                            <p><a class="btn btn-secondary" href="{% url 'catalog:product' object.pk %}"
+                                  role="button">Подробнее &raquo;</a></p>
+                            <span class="text-muted">Создан {{ object.created_at }}</span>
+                            <br>
+                            {% for version in versions %}
+                                {% if object.pk == version.product.pk %}
+                                    <span class="text-muted">Версия {{ version.version_name }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-link" href="{% url 'catalog:product_update' object.pk %}">Изменить</a>
+                            <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-link" href="{% url 'catalog:product_update' object.pk %}">Изменить</a>
-                        <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
 
-        </div>
+            </div>
 
-        <hr>
+            <hr>
 
-    </div> <!-- /container -->
+        </div> <!-- /container -->
 
-</main>
+    </main>
 
 {% endblock %}
