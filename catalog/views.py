@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
@@ -20,6 +22,8 @@ class ContextViewMixin:
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
@@ -61,13 +65,13 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-class ProductCreateView(ContextViewMixin, CreateView):
+class ProductCreateView(ContextViewMixin, LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
 
-class ProductUpdateView(ContextViewMixin, UpdateView):
+class ProductUpdateView(ContextViewMixin, LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
@@ -75,6 +79,6 @@ class ProductUpdateView(ContextViewMixin, UpdateView):
         return reverse('catalog:product', args=[self.kwargs.get('pk')])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
