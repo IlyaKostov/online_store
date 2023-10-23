@@ -34,6 +34,12 @@ class ProductForm(FormClassMixin, forms.ModelForm):
                 raise forms.ValidationError(f'Слово {word} запрещено использовать')
 
 
+class ManagerProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+
+
 class VersionForm(FormClassMixin, forms.ModelForm):
 
     class Meta:

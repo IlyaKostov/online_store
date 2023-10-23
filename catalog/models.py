@@ -15,6 +15,7 @@ class Product(models.Model):
     purchase_price = models.IntegerField(verbose_name='цена за покупку')
     created_at = models.DateField(auto_now_add=True, verbose_name='дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='дата последнего изменения')
+    is_published = models.BooleanField(default=False, verbose_name='признак публикации')
 
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, verbose_name='пользователь', **NULLABLE)
 
@@ -25,6 +26,12 @@ class Product(models.Model):
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
         ordering = ('product_name',)
+        permissions = [
+            (
+                'set_published',
+                'Can publish posts'
+            )
+        ]
 
 
 class Category(models.Model):

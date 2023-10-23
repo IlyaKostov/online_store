@@ -1,11 +1,14 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ManagerProductForm
 from catalog.models import Product, Contact, Version
+from users.models import User
 
 
 class ContextViewMixin:
@@ -44,6 +47,12 @@ class ProductListView(ListView):
         context['versions'] = version_list
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(user=self.request.user)
+
 
 class ContactView(TemplateView):
     template_name = 'catalog/contact.html'
@@ -64,6 +73,12 @@ class ContactView(TemplateView):
 class ProductDetailView(DetailView):
     model = Product
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['fullname'] = User.objects.get(id=self.request.user.pk).get_full_name()
+        print(context_data)
+        return context_data
+
 
 class ProductCreateView(ContextViewMixin, LoginRequiredMixin, CreateView):
     model = Product
@@ -77,6 +92,22 @@ class ProductUpdateView(ContextViewMixin, LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:product', args=[self.kwargs.get('pk')])
+
+    def get_form_class(self):
+        try:
+            manager = self.request.user.groups.get(name='moderator')
+        except Group.DoesNotExist:
+            manager = None
+        if self.request.user.is_staff and manager:
+            form_class = ManagerProductForm
+            return form_class
+        return super().get_form_class()
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.user != self.request.user:
+            raise Http404
+        return self.object
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
