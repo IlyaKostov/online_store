@@ -1,0 +1,104 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "product_name": "Микроволновая печь BORK W800",
+      "description": "Разработанная в Австралии модель соединяет преимущества микроволновой печи, аэрогриля и духовки. Готовьте картофель фри, цыплёнка с золотистой корочкой, выпекайте десерты и разогревайте блюда на одном устройстве. Сочетайте три режима, используя функцию «Комби», для более быстрого приготовления блюд",
+      "preview": "",
+      "category": 3,
+      "purchase_price": 72000,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "product_name": "Мороженица BORK E801",
+      "description": "Во время работы прибора вы можете легко добавить дополнительные ингредиенты: шоколадную крошку, свежие фрукты, варенье, джем или сок для получения неповторимого вкуса вашего мороженого",
+      "preview": "",
+      "category": 3,
+      "purchase_price": 58000,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "product_name": "Samsung Galaxy A03 Core 32 ГБ чёрный",
+      "description": "Операционная система\r\nAndroid\r\nВерсия операционной системы\r\n11 Go",
+      "preview": "",
+      "category": 1,
+      "purchase_price": 7000,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "product_name": "Xiaomi Redmi Note 12 128 ГБ серый",
+      "description": "Xiaomi Redmi Note 12 оснащён 6.67-дюймовым AMOLED-дисплеем с разрешением 2400x1080. Частота обновления экрана в 120 Гц повышает плавность изображения, а за счёт ускоренной до 240 Гц частоты опроса сенсор быстро и безошибочно реагирует на касания.",
+      "preview": "",
+      "category": 1,
+      "purchase_price": 17490,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "product_name": "LG 75QNED996PB (2021) 75\" 8K QNED MiniLED",
+      "description": "LG QNED mini LED представляет собой начало новой эры ЖК-телевизоров. Новаторский дисплей сочетает в себе панель mini LED с технологией Quantum Dot NanoCell, которые обеспечивают совершенно новые впечатления от просмотра телевизора. Это действительно вершина развития ЖК-телевизоров.",
+      "preview": "",
+      "category": 2,
+      "purchase_price": 299990,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "product_name": "LG OLED77Z29LA (2022) 77\" 8K UHD OLED",
+      "description": "Вы не просто смотрите телевизор — перед вашими глазами разворачивается реальная жизнь.\r\nLG OLED Z2 сочетает в себе глубокие насыщенные цвета OLED-дисплея с самоподсвечивающимися пикселями и масштабность разрешения 8K. 33 миллиона пикселей подсвечиваются независимо друг от друга, обеспечивая эффект полного погружения.",
+      "preview": "",
+      "category": 2,
+      "purchase_price": 1299990,
+      "creation_date": "2023-09-07",
+      "last_change_date": "2023-09-07"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Смартфоны",
+      "description": "Самая современная связь"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Телевизоры",
+      "description": "Лучшие в мире"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Для кухни",
+      "description": "Все что нужно настоящей хозяйке"
+    }
+  }
+]
